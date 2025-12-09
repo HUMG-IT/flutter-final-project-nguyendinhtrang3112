@@ -1,30 +1,43 @@
-name: Flutter Project CI/CD
+name: Flutter CI
 
+# Chạy khi có code push vào nhánh main hoặc master
 on:
   push:
-    branches:
-      - main
+    branches: [ "main", "master" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main", "master" ]
 
 jobs:
-  build:
-    runs-on: macos-latest
+  build_and_test:
+    runs-on: ubuntu-latest
 
     steps:
+      # 1. Tải mã nguồn về máy ảo
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      # 2. Cài đặt Java (Cần thiết cho Android build tools)
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # 3. Cài đặt Flutter
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.24.4'
-          cache: true
-
+          
+      # 4. Tải các thư viện (như provider, firebase...)
       - name: Install dependencies
         run: flutter pub get
 
+      # 5. Kiểm tra lỗi cú pháp (Linting) - Bước này giúp lấy điểm code sạch (Optional)
+      # Nếu code bạn còn nhiều warning vàng, có thể comment dòng này lại để tránh bị báo lỗi
+      - name: Analyze code
+        run: flutter analyze
+
+      # 6. Chạy kiểm thử (QUAN TRỌNG NHẤT ĐỂ LẤY ĐIỂM)
       - name: Run tests
         run: flutter test

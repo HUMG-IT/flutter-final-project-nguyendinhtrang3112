@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "79271194536",
+    "project_id": "point-manager-dff26",
+    "storage_bucket": "point-manager-dff26.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79271194536:android:438862ae462bd4017fb79d",
+        "android_client_info": {
+          "package_name": "com.example.flutter_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdviTNaAbislKPKfmZaNtZfk83hBV0G2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79271194536:android:5abf9a2f8ac557d67fb79d",
+        "android_client_info": {
+          "package_name": "com.example.student_grade_manager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdviTNaAbislKPKfmZaNtZfk83hBV0G2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

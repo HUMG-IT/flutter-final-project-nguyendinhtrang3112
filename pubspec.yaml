@@ -1,21 +1,38 @@
-name: flutter_project
+name: student_grade_manager
 description: "A new Flutter project."
-publish_to: "none"
-version: 0.1.0
+publish_to: 'none' 
+
+version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.4
+  # Chỉnh lại range SDK để tương thích tốt với hầu hết máy hiện nay
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
+  # --- THƯ VIỆN QUẢN LÝ TRẠNG THÁI (BẮT BUỘC) ---
+  # Dùng để kết nối Logic và UI (ChangeNotifierProvider)
+  provider: ^6.1.1
+
+  # --- THƯ VIỆN FIREBASE (BACKEND) ---
+  # Core để khởi tạo Firebase
+  firebase_core: ^3.6.0
+  # Database để lưu trữ môn học
+  cloud_firestore: ^5.4.0
+
+  # Icon mặc định của iOS
+  cupertino_icons: ^1.0.8
+  uuid: ^4.5.2
+  firebase_auth: ^5.7.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  integration_test:
-    sdk: flutter
-  flutter_lints: ^4.0.0
+
+  # Lint để nhắc nhở code sạch
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
