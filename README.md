@@ -51,7 +51,7 @@
 ### 4. Kiểm thử (Testing)
 Dự án bao gồm các bài kiểm thử trong thư mục `test/`:
 * **Unit Test (`models/subject_model_test.dart`):** Kiểm tra logic chuyển đổi dữ liệu JSON và tính toán trạng thái Đạt/Trượt.
-* **Unit Test (`providers/subject_provider_test.dart`):** Kiểm tra logic tính toán GPA chính xác.
+* **Unit Test (`utils/validators_test.dart`):** Kiểm tra các hàm logic xác thực dữ liệu đầu vào (Validate tên môn, điểm số, tín chỉ).
 * **Widget Test (`widget_test.dart`):** Kiểm tra hiển thị của các Widget cơ bản.
 
 ### 5. CI/CD
