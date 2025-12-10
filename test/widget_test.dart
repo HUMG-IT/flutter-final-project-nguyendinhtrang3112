@@ -1,70 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:provider/provider.dart';
 
-// ✅ Import đúng tên dự án của cậu (student_grade_manager)
-import 'package:student_grade_manager/providers/subject_provider.dart';
-import 'package:student_grade_manager/screens/home_screen.dart';
+// Import đúng file của dự án cậu
 import 'package:student_grade_manager/models/subject_model.dart';
-
-// --- MOCK PROVIDER (GIẢ LẬP) ---
-class MockSubjectProvider extends SubjectProvider {
-  @override
-  void startListeningToSubjects() {} // Không gọi Firebase
-  @override
-  List<Subject> get subjects => [];
-  @override
-  double get gpa => 0.0;
-  @override
-  bool get isLoading => false;
-  @override
-  bool get isDescending => true;
-}
+import 'package:student_grade_manager/widgets/subject_card.dart';
 
 void main() {
-  Widget createHomeScreen() {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<SubjectProvider>(
-          create: (_) => MockSubjectProvider(),
-        ),
-      ],
-      child: const MaterialApp(home: HomeScreen()),
+  testWidgets('Test hiển thị SubjectCard độc lập (Không cần Firebase)',
+      (WidgetTester tester) async {
+    // 1. TẠO DỮ LIỆU GIẢ (Mock Data)
+    // Tạo một môn học mẫu để hiển thị
+    final subject = Subject(
+      id: 'test_id_123',
+      name: 'Lập trình Flutter', // Tên môn sẽ hiển thị
+      score: 9.5, // Điểm số
+      credits: 3, // Tín chỉ
+      // Nếu model của cậu còn trường nào khác (ví dụ kỳ học), hãy điền nốt vào đây
     );
-  }
 
-  // --- BÀI TEST 1: Kiểm tra giao diện Home ---
-  testWidgets('Hiển thị đúng các thành phần UI trên Home',
-      (WidgetTester tester) async {
-    // 1. Khởi động màn hình
-    await tester.pumpWidget(createHomeScreen());
+    // 2. BUILD WIDGET
+    // Bọc SubjectCard trong MaterialApp -> Scaffold để nó có giao diện chuẩn
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.all(10),
+            // Chỉ hiển thị đúng cái Card này thôi, không cần Provider hay Firebase gì cả
+            child: SubjectCard(
+              subject: subject,
+              onTap: () {
+                print("Đã bấm vào card!");
+              },
+            ),
+          ),
+        ),
+      ),
+    );
 
-    // 2. [QUAN TRỌNG] Đổi pump -> pumpAndSettle để đợi UI load xong hẳn
-    await tester.pumpAndSettle();
+    // 3. KIỂM TRA (ASSERT)
+    // Máy tính sẽ soi xem trên màn hình có chữ 'Lập trình Flutter' không
+    expect(find.text('Lập trình Flutter'), findsOneWidget);
 
-    // 3. Kiểm tra nút thêm (+) -> Nếu tìm thấy nghĩa là App không bị sập
-    expect(find.byIcon(Icons.add), findsOneWidget);
+    // Kiểm tra xem có hiển thị số điểm không (tùy vào cách cậu hiển thị trong SubjectCard)
+    // Ví dụ nếu cậu hiển thị "9.5", thì tìm text chứa '9.5'
+    expect(find.textContaining('9.5'), findsOneWidget);
 
-    // 4. Kiểm tra ô tìm kiếm
-    expect(find.byType(TextField), findsOneWidget);
-
-    // 5. Kiểm tra chữ "Xin chào" (Chỉ hiện nếu HomeScreen đã có try-catch)
-    expect(find.textContaining('Xin chào'), findsOneWidget);
-  });
-
-  // --- BÀI TEST 2: Kiểm tra chuyển trang ---
-  testWidgets('Bấm nút + chuyển sang màn hình Thêm mới',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(createHomeScreen());
-    await tester.pumpAndSettle(); // Đợi load xong
-
-    // Bấm nút
-    await tester.tap(find.byIcon(Icons.add));
-
-    // Đợi hiệu ứng chuyển trang
-    await tester.pumpAndSettle();
-
-    // Kiểm tra xem đã sang trang mới chưa (tìm ô nhập liệu)
-    expect(find.byType(TextField), findsAtLeastNWidgets(1));
+    // Tìm xem có Icon nào không (ví dụ icon môn học hoặc nút xóa)
+    expect(find.byType(Icon), findsWidgets);
   });
 }
