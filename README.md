@@ -1,5 +1,5 @@
 # Student Grade Manager
-![Logo](./assets/images/logo.png)
+
 
 ## Báo cáo kết quả Bài tập lớn
 * Họ và tên: **Nguyễn Đình Trang**

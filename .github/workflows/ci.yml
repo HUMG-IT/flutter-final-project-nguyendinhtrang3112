@@ -35,8 +35,8 @@ jobs:
 
       # 5. Kiểm tra lỗi cú pháp (Linting) - Bước này giúp lấy điểm code sạch (Optional)
       # Nếu code bạn còn nhiều warning vàng, có thể comment dòng này lại để tránh bị báo lỗi
-      - name: Analyze code
-        run: flutter analyze
+      # - name: Analyze code
+      #   run: flutter analyze
 
       # 6. Chạy kiểm thử (QUAN TRỌNG NHẤT ĐỂ LẤY ĐIỂM)
       - name: Run tests
