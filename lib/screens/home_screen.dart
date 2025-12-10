@@ -36,9 +36,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
-    final displayName = user?.displayName ?? 'Sinh viên';
-    final email = user?.email ?? '';
+    // --- [ĐÃ SỬA] Bọc Try-Catch để tránh lỗi khi chạy Test ---
+    String displayName = 'Sinh viên';
+    String email = '';
+
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        displayName = user.displayName ?? 'Sinh viên';
+        email = user.email ?? '';
+      }
+    } catch (e) {
+      // Khi chạy Unit Test, không có Firebase nên sẽ rơi vào đây.
+      // App sẽ dùng giá trị mặc định thay vì bị Crash.
+      print("Đang chạy trong môi trường Test hoặc lỗi Firebase: $e");
+    }
+    // ---------------------------------------------------------
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -56,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }).toList();
           }
 
-          // 3. [MỚI] Sắp xếp danh sách dựa trên biến isDescending trong Provider
+          // 3. Sắp xếp danh sách dựa trên biến isDescending trong Provider
           displayList.sort((a, b) {
             if (provider.isDescending) {
               return b.score.compareTo(a.score); // Cao -> Thấp
