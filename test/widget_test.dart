@@ -14,7 +14,7 @@ void main() {
       id: 'test_id_123',
       name: 'Lập trình Flutter', // Tên môn sẽ hiển thị
       score: 9.5, // Điểm số
-      credit: 3, // Tín chỉ
+      credits: 3, // Tín chỉ
       // Nếu model của cậu còn trường nào khác (ví dụ kỳ học), hãy điền nốt vào đây
     );
 
