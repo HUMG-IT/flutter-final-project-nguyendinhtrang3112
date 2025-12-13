@@ -25,8 +25,8 @@ class SubjectProvider extends ChangeNotifier {
     double totalScore = 0;
     int totalCredits = 0;
     for (var subj in _subjects) {
-      totalScore += subj.score * subj.credits;
-      totalCredits += subj.credits;
+      totalScore += subj.score * subj.credit;
+      totalCredits += subj.credit;
     }
     return totalCredits == 0
         ? 0.0

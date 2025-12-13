@@ -27,7 +27,7 @@ class _AddEditSubjectScreenState extends State<AddEditSubjectScreen> {
     super.initState();
     _nameController = TextEditingController(text: widget.subject?.name ?? '');
     _creditsController =
-        TextEditingController(text: widget.subject?.credits.toString() ?? '');
+        TextEditingController(text: widget.subject?.credit.toString() ?? '');
     _scoreController =
         TextEditingController(text: widget.subject?.score.toString() ?? '');
     // Lấy dữ liệu học kỳ cũ hoặc để trống
@@ -48,7 +48,7 @@ class _AddEditSubjectScreenState extends State<AddEditSubjectScreen> {
         final newSubject = Subject(
           id: DateTime.now().millisecondsSinceEpoch.toString(),
           name: name,
-          credits: credits,
+          credit: credits,
           score: score,
           semester: semester, // Lưu học kỳ
         );
@@ -56,7 +56,7 @@ class _AddEditSubjectScreenState extends State<AddEditSubjectScreen> {
       } else {
         final updatedSubject = widget.subject!.copyWith(
           name: name,
-          credits: credits,
+          credit: credits,
           score: score,
           semester: semester, // Lưu học kỳ
         );

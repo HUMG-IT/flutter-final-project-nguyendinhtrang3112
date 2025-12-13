@@ -5,12 +5,12 @@ void main() {
   group('Subject Model Test', () {
     // 1. Test logic Qua môn / Trượt
     test('isPassed trả về true nếu điểm >= 4.0', () {
-      final subject = Subject(id: '1', name: 'Test', credits: 3, score: 4.0);
+      final subject = Subject(id: '1', name: 'Test', credit: 3, score: 4.0);
       expect(subject.isPassed, true);
     });
 
     test('isPassed trả về false nếu điểm < 4.0', () {
-      final subject = Subject(id: '1', name: 'Test', credits: 3, score: 3.9);
+      final subject = Subject(id: '1', name: 'Test', credit: 3, score: 3.9);
       expect(subject.isPassed, false);
     });
 
@@ -32,8 +32,7 @@ void main() {
     });
 
     test('toJson xuất ra đúng cấu trúc Map', () {
-      final subject =
-          Subject(id: '1', name: 'Flutter', credits: 4, score: 10.0);
+      final subject = Subject(id: '1', name: 'Flutter', credit: 4, score: 10.0);
       final json = subject.toJson();
 
       expect(json['name'], 'Flutter');
